@@ -93,13 +93,14 @@ def nthNumDiff(f, h, n):
     
 #Testing nthNumDiff function
 testFunc = lambda x : x **2
-range_ = np.linspace(-4, 4, 100)
+range_ = np.linspace(-1, 1, 100)
 
 print("Testing nth order numerical differentiation")
 
 for i in range(4):
-    plt.plot(range_, list(map(nthNumDiff(testFunc, 0.1, i), range_)))
-    
+    plt.plot(range_, list(map(nthNumDiff(testFunc, 0.1, i), range_)), label=f"f^({i})")
+plt.legend()
+plt.title("Extra: Testing numerical diff. func. on y = x**2")
 plt.show()
 
 #%%
@@ -108,16 +109,19 @@ def legendre(n : int):
 
 import scipy.special as scisp
 
+f1 = plt.figure()
+plt.title("Legendre Polynomials 0-4")
 for i in range(5):
-    plt.title(f"Legendre Polynomial {i}")
-    plt.plot(range_, list(map(legendre(i), range_)), label="My Implementation")
-    plt.legend()
-    plt.show()
+    plt.plot(range_, legendre(i)(range_), label=f"Legendre {i}")
+
+plt.legend()
+plt.show()
     
+    
+f1 = plt.figure()
+plt.title("Legendre Polynomials 0-4 (Scipy Impl.)")
 for i in range(5):
-    plt.title(f"Legendre Polynomial {i}")
-    plt.plot(range_, list(map(scisp.legendre(i), range_)), label="Scipy Impl.")
-    plt.legend()
-    plt.show()
-    
-print("The SciPy plots overlap perfectly with my implementation's plots, confirming my implementation's validity")
+    plt.plot(range_, scisp.legendre(i)(range_), label=f"Legendre {i}")
+
+plt.legend()
+plt.show()
